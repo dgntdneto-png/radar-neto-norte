@@ -52,7 +52,7 @@ a.maps{color:#FF5B15;font-size:13px;font-weight:600;display:block;margin-top:6px
 
 <div class="card">
   <label>Tienda (escribe para buscar)</label>
-  <input type="text" id="q" placeholder="Ej: Dr Jimenez, Azcapo..." oninput="buscar()" autocomplete="off">
+  <input type="text" id="q" placeholder="Ej: Austriacos, Barron, Tlatilco..." oninput="buscar()" autocomplete="off">
   <select id="sel" size="4" style="height:120px;display:none" onchange="seleccionar()"></select>
   <div id="info" style="display:none">
     <b id="tNombre"></b>
@@ -146,7 +146,8 @@ var EF='entry.1397455870';
 })();
 
 function buscar(){
-  var q=document.getElementById('q').value.trim().toLowerCase();
+  var raw=document.getElementById('q').value.trim().toLowerCase();
+  var q=raw.replace(/\bneto\b/g,'').replace(/\btienda\b/g,'').replace(/\s+/g,' ').trim();
   var sel=document.getElementById('sel');
   sel.innerHTML='';
   if(q.length<2){sel.style.display='none';return;}
