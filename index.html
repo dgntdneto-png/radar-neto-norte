@@ -109,6 +109,12 @@ a.maps{color:#FF5B15;font-size:13px;font-weight:600;display:block;margin-top:6px
   <label>Venta en pesos</label>
   <input type="number" id="venta_pesos" placeholder="0.00" min="0" step="0.01">
 
+  <label>Nombre del cliente <span style="font-weight:400;color:#aaa">(opcional)</span></label>
+  <input type="text" id="cliente_nombre" placeholder="Nombre de la persona">
+
+  <label>Teléfono del cliente <span style="font-weight:400;color:#aaa">(opcional)</span></label>
+  <input type="tel" id="cliente_telefono" placeholder="10 dígitos">
+
   <label>Comentarios <span style="font-weight:400;color:#aaa">(opcional)</span></label>
   <textarea id="comentarios" placeholder="Observaciones, acuerdos, seguimiento..."></textarea>
 
@@ -152,6 +158,8 @@ var ECATV='entry.716574478';
 var EVENP='entry.143519211';
 var ECOM='entry.124475769';
 var EF='entry.1397455870';
+var ECLNOM='entry.621360820';
+var ECLTEL='entry.1846269531';
 
 (function(){
   var hoy=new Date();
@@ -226,6 +234,8 @@ function agregar(){
   var ventaPesos=document.getElementById('venta_pesos').value.trim();
   var comentarios=document.getElementById('comentarios').value.trim();
   var fecha=document.getElementById('fecha').value;
+  var clienteNombre=document.getElementById('cliente_nombre').value.trim();
+  var clienteTelefono=document.getElementById('cliente_telefono').value.trim();
 
   var fechaForm=fecha;
   if(fecha){
@@ -247,7 +257,9 @@ function agregar(){
     +'&'+ECATV+'='+encodeURIComponent(catVenta)
     +'&'+EVENP+'='+encodeURIComponent(ventaPesos)
     +'&'+ECOM+'='+encodeURIComponent(comentarios)
-    +'&'+EF+'='+encodeURIComponent(fechaForm);
+    +'&'+EF+'='+encodeURIComponent(fechaForm)
+    +'&'+ECLNOM+'='+encodeURIComponent(clienteNombre)
+    +'&'+ECLTEL+'='+encodeURIComponent(clienteTelefono);
 
   window.open(formUrl,'_blank');
 
@@ -255,6 +267,8 @@ function agregar(){
   document.getElementById('cat_venta').value='';
   document.getElementById('venta_pesos').value='';
   document.getElementById('comentarios').value='';
+  document.getElementById('cliente_nombre').value='';
+  document.getElementById('cliente_telefono').value='';
   if(vgEl)vgEl.checked=false;
   renderizar();
   actualizarStats();
